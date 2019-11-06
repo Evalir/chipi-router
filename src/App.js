@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Router from './Router/Router'
+import Link from './Router/Link'
+import Route from './Router/Route'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const routes = {
+  home: {
+    path: '/'
+  },
+  why: {
+    path: '/why'
+  },
+  about: {
+    path: '/about'
+  }
 }
+
+const Home = () => <h1>Home</h1>
+const Why = () => <h1>Why us?</h1>
+const About = () => <h1>About us</h1>
+const NotFound = () => <h1>Not Found</h1>
+const NavBar = () => (
+  <nav>
+    <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/why">Why</Link>
+      </li>
+      <li>
+        <Link to="/about">About</Link>
+      </li>
+    </ul>
+  </nav>
+)
+
+const App = () => (
+  <main>
+    <Router NotFound={NotFound} routes={routes}>
+      <NavBar/>
+      <Route path={routes.home.path} component={Home}/>
+      <Route path={routes.why.path} component={Why}/>
+      <Route path={routes.about.path} component={About}/>
+    </Router>
+  </main>
+)
 
 export default App;
